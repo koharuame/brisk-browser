@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="1024" height="1024">
+  <!-- Brisk "Gust B": source for `pnpm tauri icon app-icon.svg`. Blue matches the accent token in src/styles.css. -->
+  <defs>
+    <linearGradient id="plate" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#5b8fff"/>
+      <stop offset="1" stop-color="#2556d6"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="15" fill="url(#plate)"/>
+  <g fill="none" stroke="#fff" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M26 17v30"/>
+    <path d="M13 17h21a7.5 7.5 0 0 1 0 15H26"/>
+    <path d="M26 32h11a7.5 7.5 0 0 1 0 15H8" opacity=".9"/>
+  </g>
+</svg>
