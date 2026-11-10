@@ -1,0 +1,609 @@
+/* Brisk website. Identity: wind (the "Gust B" mark), cool air, the app's blue.
+   One family (Bricolage Grotesque) carries everything; numbers use tabular figures. */
+
+:root {
+  --paper: #f3f6fb; /* cool air */
+  --paper-2: #e8eef8;
+  --ink: #0f1b33; /* deep navy, the text */
+  --ink-2: #4a5873;
+  --gust: #2f6fed; /* the app's accent */
+  --gust-deep: #2556d6;
+  --mist: #d4dff2;
+  --line: rgba(15, 27, 51, 0.12);
+  --sun: #f2b33d; /* "faster" in charts */
+  --measure: 34em;
+  --ease: cubic-bezier(0.2, 0, 0, 1);
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 400 17px/1.6 "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  font-optical-sizing: auto;
+  font-variation-settings: "wdth" 100;
+}
+
+a {
+  color: var(--gust-deep);
+  text-underline-offset: 3px;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--gust);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.wrap {
+  width: min(1120px, 100% - 40px);
+  margin-inline: auto;
+}
+
+.skip {
+  position: absolute;
+  left: -999px;
+}
+
+.skip:focus {
+  left: 20px;
+  top: 12px;
+  z-index: 10;
+  padding: 8px 14px;
+  background: var(--ink);
+  color: #fff;
+}
+
+/* --- site header ------------------------------------------------------------- */
+.site-head {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  height: 76px;
+}
+
+.mark {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--ink);
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-decoration: none;
+}
+
+.mark img {
+  width: 32px;
+  height: 32px;
+}
+
+.mark sup {
+  margin-left: -6px;
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--ink-2);
+}
+
+.site-nav {
+  display: flex;
+  gap: 26px;
+  margin-left: auto;
+  font-size: 15px;
+}
+
+.site-nav a {
+  color: var(--ink-2);
+  text-decoration: none;
+}
+
+.site-nav a:hover,
+.site-nav a[aria-current="page"] {
+  color: var(--ink);
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 26px;
+  border-radius: 999px;
+  background: var(--ink);
+  color: #fff;
+  font-weight: 600;
+  font-size: 16px;
+  text-decoration: none;
+  transition: background-color 0.15s var(--ease);
+}
+
+.button:hover {
+  background: var(--gust-deep);
+}
+
+.button svg {
+  width: 18px;
+  height: 18px;
+}
+
+.button.small {
+  padding: 8px 18px;
+  font-size: 14px;
+}
+
+/* --- hero: the wind is the signature ------------------------------------------- */
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: 72px 0 120px;
+}
+
+.streams {
+  position: absolute;
+  inset: -40px 0 0 0;
+  width: 100%;
+  height: calc(100% + 40px);
+  pointer-events: none;
+}
+
+.streams path {
+  fill: none;
+  stroke: var(--gust);
+  stroke-linecap: round;
+  stroke-dasharray: 2400;
+  stroke-dashoffset: 2400;
+  animation: gust 2.4s var(--ease) forwards;
+}
+
+.streams path:nth-child(1) {
+  stroke-width: 2;
+  opacity: 0.35;
+}
+
+.streams path:nth-child(2) {
+  stroke-width: 1.5;
+  opacity: 0.22;
+  animation-delay: 0.18s;
+}
+
+.streams path:nth-child(3) {
+  stroke-width: 1;
+  opacity: 0.16;
+  animation-delay: 0.36s;
+}
+
+.streams path:nth-child(4) {
+  stroke-width: 1;
+  opacity: 0.1;
+  animation-delay: 0.54s;
+}
+
+@keyframes gust {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.hero .wrap {
+  position: relative;
+}
+
+.hero h1 {
+  max-width: 11em;
+  margin: 0;
+  font-size: clamp(46px, 7.4vw, 96px);
+  font-weight: 700;
+  font-variation-settings: "wdth" 90;
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+}
+
+.hero .lede {
+  max-width: 30em;
+  margin: 28px 0 0;
+  color: var(--ink-2);
+  font-size: clamp(18px, 2vw, 21px);
+  line-height: 1.5;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 26px;
+  margin-top: 40px;
+}
+
+.fine {
+  color: var(--ink-2);
+  font-size: 14px;
+}
+
+/* --- sections ----------------------------------------------------------------- */
+section.block {
+  padding: 96px 0;
+  border-top: 1px solid var(--line);
+}
+
+h2 {
+  max-width: 16em;
+  margin: 0 0 18px;
+  font-size: clamp(30px, 4vw, 46px);
+  font-weight: 700;
+  font-variation-settings: "wdth" 92;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+}
+
+h3 {
+  margin: 0 0 8px;
+  font-size: 22px;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+}
+
+.intro {
+  max-width: var(--measure);
+  margin: 0;
+  color: var(--ink-2);
+  font-size: 19px;
+}
+
+/* Three things Brisk does, each with its measured evidence beside it. */
+.pillars {
+  display: grid;
+  gap: 0;
+  margin: 56px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pillars li {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: 24px 64px;
+  padding: 34px 0;
+  border-top: 1px solid var(--line);
+}
+
+.pillars p {
+  max-width: var(--measure);
+  margin: 0;
+  color: var(--ink-2);
+}
+
+.evidence {
+  align-self: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.evidence b {
+  display: block;
+  font-size: clamp(28px, 3.4vw, 40px);
+  font-weight: 700;
+  font-variation-settings: "wdth" 85;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.evidence span {
+  color: var(--ink-2);
+  font-size: 15px;
+}
+
+/* Everything else, as a plain two-column list. */
+.also {
+  columns: 2 300px;
+  column-gap: 64px;
+  margin: 48px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.also li {
+  break-inside: avoid;
+  padding: 18px 0;
+  border-top: 1px solid var(--line);
+}
+
+.also b {
+  display: block;
+  font-weight: 650;
+}
+
+.also span {
+  color: var(--ink-2);
+  font-size: 16px;
+}
+
+/* The story reads like a letter: narrower, larger, signed. */
+.story {
+  background: var(--paper-2);
+}
+
+.story .letter {
+  max-width: 36em;
+  font-size: 20px;
+  line-height: 1.65;
+}
+
+.story .letter p {
+  margin: 0 0 1.1em;
+}
+
+.story .principles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 34px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.story .principles li {
+  padding: 7px 16px;
+  border-radius: 999px;
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--line);
+  font-size: 15px;
+}
+
+.signature {
+  margin-top: 30px;
+  color: var(--ink-2);
+  font-size: 16px;
+}
+
+.get {
+  text-align: left;
+}
+
+.get .row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+}
+
+.reqs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0 40px;
+  margin: 40px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.reqs li {
+  padding: 14px 0;
+  border-top: 1px solid var(--line);
+  font-size: 15px;
+}
+
+.reqs b {
+  display: block;
+  color: var(--ink-2);
+  font-weight: 500;
+}
+
+/* --- speed page ------------------------------------------------------------------ */
+.page-head {
+  padding: 64px 0 56px;
+}
+
+.page-head h1 {
+  max-width: 14em;
+  margin: 0;
+  font-size: clamp(40px, 6vw, 72px);
+  font-weight: 700;
+  font-variation-settings: "wdth" 90;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.page-head .lede {
+  max-width: 34em;
+  margin: 24px 0 0;
+  color: var(--ink-2);
+  font-size: 19px;
+}
+
+.chart {
+  margin: 0;
+  padding: 30px 0 34px;
+  border-top: 1px solid var(--line);
+  font-variant-numeric: tabular-nums;
+}
+
+.chart figcaption {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px 24px;
+  margin-bottom: 18px;
+}
+
+.chart figcaption b {
+  font-size: 20px;
+  font-weight: 650;
+}
+
+.chart .delta {
+  color: var(--gust-deep);
+  font-weight: 650;
+}
+
+.bar {
+  display: grid;
+  grid-template-columns: 9.5em 1fr;
+  align-items: center;
+  gap: 16px;
+  margin: 10px 0;
+  font-size: 15px;
+}
+
+.bar .track {
+  position: relative;
+  height: 30px;
+}
+
+.bar .fill {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: var(--w);
+  height: 100%;
+  padding: 0 10px;
+  border-radius: 4px;
+  background: var(--mist);
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  transform-origin: left;
+  animation: grow 0.9s var(--ease) both;
+}
+
+.bar.brisk .fill {
+  background: var(--gust);
+  color: #fff;
+}
+
+@keyframes grow {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+.facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 0 48px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.facts li {
+  padding: 24px 0;
+  border-top: 1px solid var(--line);
+  font-variant-numeric: tabular-nums;
+}
+
+.facts b {
+  display: block;
+  font-size: 32px;
+  font-weight: 700;
+  font-variation-settings: "wdth" 85;
+  letter-spacing: -0.02em;
+}
+
+.facts span {
+  color: var(--ink-2);
+  font-size: 15px;
+}
+
+.method {
+  max-width: var(--measure);
+  color: var(--ink-2);
+}
+
+.method dt {
+  margin-top: 18px;
+  color: var(--ink);
+  font-weight: 650;
+}
+
+.method dd {
+  margin: 4px 0 0;
+}
+
+.note {
+  max-width: var(--measure);
+  padding: 20px 24px;
+  border-left: 3px solid var(--sun);
+  background: #fff;
+  color: var(--ink-2);
+}
+
+.note b {
+  color: var(--ink);
+}
+
+/* --- footer ------------------------------------------------------------------------ */
+.site-foot {
+  padding: 48px 0 56px;
+  border-top: 1px solid var(--line);
+  color: var(--ink-2);
+  font-size: 14px;
+}
+
+.site-foot .cols {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.site-foot nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 22px;
+}
+
+.site-foot a {
+  color: var(--ink-2);
+}
+
+.legal {
+  max-width: 60em;
+  margin: 28px 0 0;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* --- small screens + motion ------------------------------------------------------- */
+@media (max-width: 720px) {
+  .site-nav a:not(.button) {
+    display: none;
+  }
+  .hero {
+    padding: 40px 0 80px;
+  }
+  section.block {
+    padding: 64px 0;
+  }
+  .pillars li {
+    grid-template-columns: 1fr;
+  }
+  .bar {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .streams path {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+  .bar .fill {
+    animation: none;
+  }
+  .button {
+    transition: none;
+  }
+}
