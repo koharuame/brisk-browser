@@ -64,14 +64,28 @@ button:focus-visible {
   color: #fff;
 }
 
-/* --- site header ------------------------------------------------------------- */
+/* --- site header: sticks, and frosts over once the page scrolls under it ------- */
 .site-head {
-  position: relative;
-  z-index: 2;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  transition:
+    background-color 0.25s var(--ease),
+    box-shadow 0.25s var(--ease);
+}
+
+.site-head.is-scrolled {
+  background: rgba(243, 246, 251, 0.78);
+  box-shadow: 0 1px 0 var(--line);
+  backdrop-filter: saturate(1.4) blur(14px);
+  -webkit-backdrop-filter: saturate(1.4) blur(14px);
+}
+
+.head-row {
   display: flex;
   align-items: center;
   gap: 32px;
-  height: 76px;
+  height: 72px;
 }
 
 .mark {

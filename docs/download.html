@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Download — Brisk</title>
+    <meta name="description" content="Download Brisk for Windows 11: what setup does, getting past SmartScreen, updating, uninstalling, and common questions." />
+    <link rel="icon" href="logo.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="fx.css" />
+    <link rel="stylesheet" href="pages.css" />
+    <link rel="stylesheet" href="motion.css" />
+    <script>
+      document.documentElement.classList.add("js");
+    </script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="site-head">
+      <div class="wrap head-row">
+        <a class="mark" href="./" aria-label="Brisk home"><img src="logo.svg" alt="" />Brisk<sup>™</sup></a>
+        <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav"><i></i><i></i><span class="sr">Menu</span></button>
+        <nav class="site-nav" id="site-nav" aria-label="Site">
+          <a href="features.html">Features</a>
+          <a href="speed.html">Speed</a>
+          <a href="story.html">Story</a>
+          <a href="changelog.html">Changelog</a>
+          <a class="button small" href="download.html" aria-current="page">Download</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <div class="page-head">
+        <svg class="streams" viewBox="0 0 1440 400" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M-60 200 C 260 110, 560 300, 860 190 S 1240 90, 1500 170" />
+          <path d="M-60 260 C 280 170, 600 360, 900 250 S 1260 160, 1500 240" />
+        </svg>
+        <div class="wrap">
+          <h1>Get Brisk for Windows 11.</h1>
+          <p class="lede">One small download. Setup checks your PC, installs Brisk for your account, and you're browsing in under a minute.</p>
+          <div class="get-card">
+            <a class="button" href="https://github.com/koharuame/brisk-browser/releases/latest">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14" /></svg>
+              Download Brisk 0.1.0
+            </a>
+            <span class="fine">Brisk_0.1.0_Setup.exe, about 7 MB. Free.</span>
+          </div>
+        </div>
+      </div>
+
+      <section class="block" aria-labelledby="setup-title">
+        <div class="wrap">
+          <h2 id="setup-title">What setup does</h2>
+          <ol class="steps">
+            <li><h3>Checks your PC</h3><p>Windows 11, a 64-bit processor, the WebView2 engine, disk space and memory, with a note on anything worth knowing.</p></li>
+            <li><h3>Asks two questions</h3><p>Whether you'd like a desktop shortcut, and whether to open Windows' default-browser settings afterwards.</p></li>
+            <li><h3>Installs for you only</h3><p>Brisk goes into your own app folder, so no admin rights are needed. If WebView2 is missing or out of date, setup gets it.</p></li>
+            <li><h3>Opens Brisk</h3><p>Brisk is on your Start menu. Bring your bookmarks and passwords over from Settings whenever you like.</p></li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="block story" aria-labelledby="ss-title">
+        <div class="wrap story-grid">
+          <div>
+            <h2 id="ss-title">If Windows asks before running setup</h2>
+            <p class="intro">Brisk's installer isn't code-signed yet, so Windows SmartScreen may show a blue "Windows protected your PC" box the first time.</p>
+            <ol class="rules">
+              <li>Select <b>More info</b>.</li>
+              <li>Check the app name reads <b>Brisk_0.1.0_Setup.exe</b>.</li>
+              <li>Select <b>Run anyway</b>.</li>
+            </ol>
+            <p class="fine">Only run setup that you downloaded from this site or from github.com/koharuame/brisk-browser.</p>
+          </div>
+          <div class="shot" aria-hidden="true">
+            <b>Windows protected your PC</b>
+            <p>Microsoft Defender SmartScreen prevented an unrecognized app from starting. Running this app might put your PC at risk.</p>
+            <span class="shot-link">More info</span>
+            <div class="shot-btns"><span>Run anyway</span><span>Don't run</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="block" aria-labelledby="req-title">
+        <div class="wrap">
+          <h2 id="req-title">What you need</h2>
+          <ul class="reqs">
+            <li><b>System</b>Windows 11, 64-bit (x64; ARM64 runs it through emulation)</li>
+            <li><b>Engine</b>Microsoft Edge WebView2 Runtime 119 or newer, installed for you if missing</li>
+            <li><b>Disk</b>100 MB free, more as you browse</li>
+            <li><b>Memory</b>4 GB or more is comfortable</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="block" aria-labelledby="faq-title">
+        <div class="wrap">
+          <h2 id="faq-title">Questions</h2>
+          <div class="faq">
+            <details>
+              <summary>Is Brisk free?</summary>
+              <div><p>Yes. Brisk is free to download and use, with no account and no ads of its own.</p></div>
+            </details>
+            <details>
+              <summary>How do updates work?</summary>
+              <div>
+                <p>Once a day Brisk asks this site's release page for the newest version number. When there's an update, a dot appears on the settings button; choose <b>Update and restart</b> in Settings → About whenever it suits you.</p>
+                <p>Every update is checked against Brisk's signature before it's installed. You can turn automatic checks off in Settings.</p>
+              </div>
+            </details>
+            <details>
+              <summary>Can I bring my bookmarks and passwords?</summary>
+              <div><p>Yes. Import bookmarks from another browser's HTML export, and passwords from the CSV export of Chrome, Edge, Brave or Firefox, in Settings.</p></div>
+            </details>
+            <details>
+              <summary>Does Brisk work on Windows 10?</summary>
+              <div><p>Not yet. Brisk is built and tested for Windows 11 only, and setup stops on older versions of Windows.</p></div>
+            </details>
+            <details>
+              <summary>Where does Brisk keep my data?</summary>
+              <div><p>On your PC only, in your user folder under <code>AppData\Roaming\app.brisk.browser</code> and <code>AppData\Local\app.brisk.browser</code>. Nothing is stored online.</p></div>
+            </details>
+            <details>
+              <summary>How do I uninstall Brisk?</summary>
+              <div><p>Open Windows Settings → Apps → Installed apps, find Brisk, and choose Uninstall. Tick <b>Delete the application data</b> if you also want your history, bookmarks and passwords removed.</p></div>
+            </details>
+            <details>
+              <summary>Is the source code available?</summary>
+              <div><p>Not at the moment. This site and its release page are where Brisk is published, and where you can <a href="https://github.com/koharuame/brisk-browser/issues">report a problem</a>.</p></div>
+            </details>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-foot">
+      <div class="wrap">
+        <div class="foot-grid">
+          <div class="foot-brand">
+            <a class="mark" href="./"><img src="logo.svg" alt="" />Brisk<sup>™</sup></a>
+            <p>A lighter way to browse on Windows.</p>
+          </div>
+          <nav aria-label="Product">
+            <h2>Product</h2>
+            <a href="features.html">Features</a>
+            <a href="speed.html">Speed</a>
+            <a href="download.html">Download</a>
+            <a href="changelog.html">Changelog</a>
+          </nav>
+          <nav aria-label="About">
+            <h2>About</h2>
+            <a href="story.html">Story</a>
+            <a href="story.html#brand">Brand and trademark</a>
+            <a href="https://github.com/koharuame/brisk-browser/issues">Report a problem</a>
+          </nav>
+        </div>
+        <p class="legal">
+          © 2026 Koharuame. Brisk™ and the Brisk logo are trademarks of Koharuame. Microsoft, Windows, Edge, WebView2 and Microsoft Defender SmartScreen are trademarks of the Microsoft group of companies. Chrome is a trademark of Google LLC. Firefox is a trademark of the Mozilla Foundation. Brave is a trademark of Brave Software, Inc. Use of these names does not imply endorsement.
+        </p>
+      </div>
+    </footer>
+
+    <script src="site.js"></script>
+  </body>
+</html>

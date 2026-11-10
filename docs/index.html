@@ -13,29 +13,41 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="fx.css" />
+    <link rel="stylesheet" href="pages.css" />
+    <link rel="stylesheet" href="motion.css" />
+    <script>
+      document.documentElement.classList.add("js");
+    </script>
   </head>
   <body>
     <a class="skip" href="#main">Skip to content</a>
 
+    <header class="site-head" id="top">
+      <div class="wrap head-row">
+        <a class="mark" href="./" aria-label="Brisk home"><img src="logo.svg" alt="" />Brisk<sup>™</sup></a>
+        <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav"><i></i><i></i><span class="sr">Menu</span></button>
+        <nav class="site-nav" id="site-nav" aria-label="Site">
+          <a href="features.html">Features</a>
+          <a href="speed.html">Speed</a>
+          <a href="story.html">Story</a>
+          <a href="changelog.html">Changelog</a>
+          <a class="button small" href="download.html">Download</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
     <section class="hero">
+      <!-- The signature: a field of wind that drifts on its own and follows the pointer (site.js). -->
+      <canvas class="wind-field" aria-hidden="true"></canvas>
       <svg class="streams" viewBox="0 0 1440 640" preserveAspectRatio="none" aria-hidden="true">
         <path d="M-60 300 C 260 180, 520 420, 820 290 S 1220 150, 1500 250" />
         <path d="M-60 360 C 280 250, 560 480, 860 350 S 1240 220, 1500 320" />
         <path d="M-60 420 C 240 330, 540 540, 840 420 S 1230 300, 1500 390" />
-        <path d="M-60 480 C 300 400, 600 600, 900 480 S 1260 380, 1500 460" />
       </svg>
-      <div class="wrap">
-        <header class="site-head">
-          <a class="mark" href="./" aria-label="Brisk home"><img src="logo.svg" alt="" />Brisk<sup>™</sup></a>
-          <nav class="site-nav" aria-label="Site">
-            <a href="#what">Features</a>
-            <a href="speed.html">Speed</a>
-            <a href="#story">Story</a>
-            <a class="button small" href="https://github.com/koharuame/brisk-browser/releases/latest">Download</a>
-          </nav>
-        </header>
-
-        <main id="main">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
           <h1>A lighter way to browse on Windows.</h1>
           <p class="lede">
             Brisk blocks ads before they load, puts the tabs you're not using to sleep, and keeps your history on your PC. It's built on the web engine already inside Windows 11, so the whole download is about 7&nbsp;MB.
@@ -47,7 +59,59 @@
             </a>
             <span class="fine">Free. Version 0.1.0.</span>
           </div>
-        </main>
+        </div>
+
+        <!-- A Brisk window you can play with: flip ad blocking and watch the page reload. -->
+        <figure class="demo" aria-label="Interactive preview of Brisk loading a news page">
+          <div class="demo-win" id="demo" data-adblock="on">
+            <div class="demo-strip">
+              <span class="demo-tab is-active"><i class="dot"></i>Morning news</span>
+              <span class="demo-tab is-asleep">
+                <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10.5 2.5a5.5 5.5 0 1 0 3 9.6A6 6 0 0 1 10.5 2.5Z" /></svg>Recipes
+              </span>
+              <span class="demo-tab is-asleep">
+                <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10.5 2.5a5.5 5.5 0 1 0 3 9.6A6 6 0 0 1 10.5 2.5Z" /></svg>Weather
+              </span>
+              <span class="demo-win-btns" aria-hidden="true"><i></i><i></i><i></i></span>
+            </div>
+            <div class="demo-bar">
+              <span class="demo-url">
+                <svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.5" /><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" /></svg>
+                news.example
+              </span>
+              <span class="demo-shield" title="Ads and trackers blocked on this page">
+                <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5 13 3.5v4c0 3.3-2.2 5.8-5 7-2.8-1.2-5-3.7-5-7v-4Z" /></svg>
+                <b id="demo-count">0</b>
+              </span>
+            </div>
+            <div class="demo-page">
+              <div class="demo-progress" id="demo-progress"></div>
+              <div class="demo-content" id="demo-content">
+                <div class="sk sk-title"></div>
+                <div class="ad" data-ad>Ad</div>
+                <div class="sk"></div>
+                <div class="sk"></div>
+                <div class="sk sk-short"></div>
+                <div class="demo-cols">
+                  <div class="sk-img"></div>
+                  <div class="ad ad-side" data-ad>Ad</div>
+                </div>
+                <div class="sk"></div>
+                <div class="ad ad-wide" data-ad>Ad</div>
+                <div class="sk sk-short"></div>
+              </div>
+            </div>
+          </div>
+          <figcaption class="demo-controls">
+            <label class="switch">
+              <input type="checkbox" id="demo-toggle" checked />
+              <span class="switch-track" aria-hidden="true"><span></span></span>
+              Ad blocking
+            </label>
+            <span class="demo-time" aria-live="polite"><span id="demo-time">—</span></span>
+          </figcaption>
+          <p class="demo-note">Load times are our measured medians on ten ad-heavy sites.</p>
+        </figure>
       </div>
     </section>
 
@@ -61,14 +125,20 @@
               <h3>Ads and trackers never load</h3>
               <p>Brisk checks every request against EasyList, EasyPrivacy and uBlock Origin's filter lists, and drops ads and trackers before they reach the page. Known malware and phishing sites are stopped with a warning.</p>
             </div>
-            <p class="evidence"><b>32% faster</b><span>median page load on ten ad-heavy news sites, ad blocking on vs off. <a href="speed.html">How we measured</a></span></p>
+            <p class="evidence"><b><span data-count="32">32</span>% faster</b><span>median page load on ten ad-heavy news sites, ad blocking on vs off. <a href="speed.html">How we measured</a></span></p>
           </li>
           <li>
             <div>
               <h3>Tabs you're not using sleep</h3>
               <p>Hidden tabs step down in stages: hidden, then lighter, then suspended, then put away with their scroll position and form text saved. Click one and it comes back where you left it. Tabs playing audio are never put to sleep.</p>
             </div>
-            <p class="evidence"><b>1,921 → 375 MB</b><span>memory for ten open tabs after ten idle minutes. <a href="speed.html#sleep">Details</a></span></p>
+            <div class="evidence sleepy" id="sleepy">
+              <div class="naps" aria-hidden="true">
+                <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+              </div>
+              <b><span id="sleepy-mb">375</span> MB</b>
+              <span>memory for ten open tabs, down from 1,921 MB after ten idle minutes. <a href="speed.html#sleep">Details</a></span>
+            </div>
           </li>
           <li>
             <div>
@@ -89,32 +159,68 @@
           <li><b>Looks like Windows 11</b><span>Light and dark themes, rounded pages, and the system's own fonts and icons.</span></li>
           <li><b>English and Thai</b><span>The whole interface, including the new tab page, in either language.</span></li>
         </ul>
+        <a class="more" href="features.html">See everything Brisk does</a>
       </div>
     </section>
+
+    <!-- Wind tunnel: two lines of huge type drift with the scroll, in opposite directions. -->
+    <div class="tunnel" aria-hidden="true">
+      <div class="tunnel-row" data-drift="-1"><span>Less loading</span><span>Less waiting</span><span>Less tracking</span><span>Less loading</span><span>Less waiting</span><span>Less tracking</span></div>
+      <div class="tunnel-row is-outline" data-drift="1"><span>More browsing</span><span>More memory</span><span>More privacy</span><span>More browsing</span><span>More memory</span><span>More privacy</span></div>
+    </div>
 
     <section class="block story" id="story" aria-labelledby="story-title">
-      <div class="wrap">
-        <h2 id="story-title">Why Brisk exists</h2>
-        <div class="letter">
-          <p>Browsers kept getting heavier. Every one of them shipped its own copy of a web engine, asked for an account, and quietly sent home how it was used. Windows 11 already has a modern engine built in, kept up to date by Windows itself.</p>
-          <p>Brisk started in November 2026 as a question: what if a browser used that engine and spent its effort on the things that make browsing feel fast — blocking what you didn't ask for and resting what you aren't using — instead of on features nobody requested?</p>
-          <p>Every performance change to Brisk is measured on real, ad-heavy sites before it ships. If it doesn't make Brisk lighter or faster, it doesn't go in.</p>
+      <div class="wrap story-grid">
+        <div>
+          <h2 id="story-title">Why Brisk exists</h2>
+          <div class="letter">
+            <p>Browsers kept getting heavier. Every one of them shipped its own copy of a web engine, asked for an account, and quietly sent home how it was used. Windows 11 already has a modern engine built in, kept up to date by Windows itself.</p>
+            <p>Brisk started in November 2026 as a question: what if a browser used that engine and spent its effort on the things that make browsing feel fast — blocking what you didn't ask for and resting what you aren't using — instead of on features nobody requested?</p>
+            <p>Every performance change to Brisk is measured on real, ad-heavy sites before it ships. If it doesn't make Brisk lighter or faster, it doesn't go in.</p>
+          </div>
+          <ul class="principles" aria-label="Principles">
+            <li>No telemetry</li>
+            <li>No account required</li>
+            <li>No background services</li>
+            <li>Measured, not claimed</li>
+          </ul>
+          <p class="signature">Koharuame, maker of Brisk</p>
+          <a class="more" href="story.html">Read the whole story</a>
         </div>
-        <ul class="principles" aria-label="Principles">
-          <li>No telemetry</li>
-          <li>No account required</li>
-          <li>No background services</li>
-          <li>Measured, not claimed</li>
-        </ul>
-        <p class="signature">Koharuame, maker of Brisk</p>
+        <!-- The mark, large: how the B is drawn from three strokes of wind. -->
+        <figure class="mark-study" aria-hidden="true">
+          <svg viewBox="0 0 64 64">
+            <defs>
+              <linearGradient id="plate2" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#5b8fff" />
+                <stop offset="1" stop-color="#2556d6" />
+              </linearGradient>
+            </defs>
+            <rect width="64" height="64" rx="15" fill="url(#plate2)" />
+            <g fill="none" stroke="#fff" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round" class="draw">
+              <path d="M26 17v30" />
+              <path d="M13 17h21a7.5 7.5 0 0 1 0 15H26" />
+              <path d="M26 32h11a7.5 7.5 0 0 1 0 15H8" opacity=".9" />
+            </g>
+          </svg>
+          <figcaption>The Gust B: three strokes, the last one trailing off like wind.</figcaption>
+        </figure>
       </div>
     </section>
 
-    <section class="block get" id="download" aria-labelledby="get-title">
+    <section class="sky" id="download" aria-labelledby="get-title">
+      <svg class="sky-streams" viewBox="0 0 1440 420" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M-40 120 C 300 40, 600 220, 900 120 S 1300 40, 1480 110" />
+        <path d="M-40 200 C 320 120, 640 300, 940 200 S 1320 120, 1480 190" />
+        <path d="M-40 280 C 280 210, 600 370, 900 280 S 1300 200, 1480 270" />
+      </svg>
       <div class="wrap">
-        <div class="row">
-          <h2 id="get-title">Get Brisk for Windows 11</h2>
-          <a class="button" href="https://github.com/koharuame/brisk-browser/releases/latest">
+        <div class="sky-row">
+          <div>
+            <h2 id="get-title">Get Brisk for Windows 11</h2>
+            <p class="sky-lede">Free, about 7 MB, installed for your account only. No admin rights needed.</p>
+          </div>
+          <a class="button light" href="https://github.com/koharuame/brisk-browser/releases/latest">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14" /></svg>
             Download Brisk 0.1.0
           </a>
@@ -123,26 +229,40 @@
           <li><b>System</b>Windows 11, 64-bit</li>
           <li><b>Engine</b>Microsoft Edge WebView2, installed for you if missing</li>
           <li><b>Disk</b>100 MB free</li>
-          <li><b>Install</b>For your account only; no admin rights needed</li>
+          <li><b>First run</b>The installer isn't code-signed yet: if SmartScreen asks, choose More info, then Run anyway</li>
         </ul>
-        <p class="fine">The installer isn't code-signed yet, so Windows SmartScreen may ask first: choose <i>More info</i>, then <i>Run anyway</i>.</p>
       </div>
     </section>
 
+    </main>
+
     <footer class="site-foot">
       <div class="wrap">
-        <div class="cols">
-          <a class="mark" href="./"><img src="logo.svg" alt="" />Brisk<sup>™</sup></a>
-          <nav aria-label="Footer">
+        <div class="foot-grid">
+          <div class="foot-brand">
+            <a class="mark" href="./"><img src="logo.svg" alt="" />Brisk<sup>™</sup></a>
+            <p>A lighter way to browse on Windows.</p>
+          </div>
+          <nav aria-label="Product">
+            <h2>Product</h2>
+            <a href="features.html">Features</a>
             <a href="speed.html">Speed</a>
-            <a href="#story">Story</a>
-            <a href="https://github.com/koharuame/brisk-browser/releases">Releases</a>
+            <a href="download.html">Download</a>
+            <a href="changelog.html">Changelog</a>
+          </nav>
+          <nav aria-label="About">
+            <h2>About</h2>
+            <a href="story.html">Story</a>
+            <a href="story.html#brand">Brand and trademark</a>
+            <a href="https://github.com/koharuame/brisk-browser/issues">Report a problem</a>
           </nav>
         </div>
         <p class="legal">
-          © 2026 Koharuame. Brisk™ and the Brisk logo are trademarks of Koharuame. Microsoft, Windows and WebView2 are trademarks of the Microsoft group of companies. Chrome Web Store is a trademark of Google LLC. uBlock Origin is a project of its respective authors. Use of these names does not imply endorsement.
+          © 2026 Koharuame. Brisk™ and the Brisk logo are trademarks of Koharuame. Microsoft, Windows and WebView2 are trademarks of the Microsoft group of companies. Chrome Web Store is a trademark of Google LLC. uBlock Origin, EasyList and EasyPrivacy belong to their respective authors. Use of these names does not imply endorsement.
         </p>
       </div>
     </footer>
+
+    <script src="site.js"></script>
   </body>
 </html>

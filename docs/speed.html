@@ -4,35 +4,49 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Speed — Brisk</title>
-    <meta name="description" content="How fast Brisk is, measured on ten ad-heavy websites: page loads, CPU time and memory, with the method and raw numbers." />
+    <meta name="description" content="How fast Brisk is, measured on ten ad-heavy websites: page loads, processor time and memory, with the method and the numbers." />
     <link rel="icon" href="logo.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="fx.css" />
+    <link rel="stylesheet" href="pages.css" />
+    <link rel="stylesheet" href="motion.css" />
+    <script>
+      document.documentElement.classList.add("js");
+    </script>
   </head>
   <body>
     <a class="skip" href="#main">Skip to content</a>
-    <div class="wrap">
-      <header class="site-head">
+    <header class="site-head">
+      <div class="wrap head-row">
         <a class="mark" href="./" aria-label="Brisk home"><img src="logo.svg" alt="" />Brisk<sup>™</sup></a>
-        <nav class="site-nav" aria-label="Site">
-          <a href="./#what">Features</a>
+        <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav"><i></i><i></i><span class="sr">Menu</span></button>
+        <nav class="site-nav" id="site-nav" aria-label="Site">
+          <a href="features.html">Features</a>
           <a href="speed.html" aria-current="page">Speed</a>
-          <a href="./#story">Story</a>
-          <a class="button small" href="https://github.com/koharuame/brisk-browser/releases/latest">Download</a>
+          <a href="story.html">Story</a>
+          <a href="changelog.html">Changelog</a>
+          <a class="button small" href="download.html">Download</a>
         </nav>
-      </header>
+      </div>
+    </header>
 
-      <main id="main">
-        <div class="page-head">
+    <main id="main">
+      <div class="page-head">
+        <svg class="streams" viewBox="0 0 1440 400" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M-60 200 C 260 110, 560 300, 860 190 S 1240 90, 1500 170" />
+          <path d="M-60 260 C 280 170, 600 360, 900 250 S 1260 160, 1500 240" />
+        </svg>
+        <div class="wrap">
           <h1>How fast is Brisk, measured.</h1>
-          <p class="lede">
-            We load the same ten ad-heavy websites with Brisk's ad blocking off, then on, and record how long pages take, how much processor time they burn and how much memory they hold. These are the results, and how we got them.
-          </p>
+          <p class="lede">We load the same ten ad-heavy websites with Brisk's ad blocking off, then on, and record how long pages take, how much processor time they burn and how much memory they hold. These are the results, and how we got them.</p>
         </div>
+      </div>
 
-        <section aria-labelledby="adblock-title">
+      <section class="block" aria-labelledby="adblock-title">
+        <div class="wrap">
           <h2 id="adblock-title">Blocking ads makes pages faster</h2>
           <p class="intro">Same browser, same sites, same PC. The only difference is whether ads and trackers are allowed to load.</p>
 
@@ -59,9 +73,11 @@
             <div class="bar"><span>Ad blocking off</span><div class="track"><div class="fill" style="--w: 100%">2,225 MB</div></div></div>
             <div class="bar brisk"><span>Brisk, ad blocking on</span><div class="track"><div class="fill" style="--w: 89.5%">1,992 MB</div></div></div>
           </figure>
-        </section>
+        </div>
+      </section>
 
-        <section class="block" id="sleep" aria-labelledby="sleep-title">
+      <section class="block" id="sleep" aria-labelledby="sleep-title">
+        <div class="wrap">
           <h2 id="sleep-title">Sleeping tabs give memory back</h2>
           <p class="intro">Ten sites open, then left alone for ten minutes with Brisk's default sleep settings. Tabs in the background step down until they hold almost nothing; the one you're looking at is never touched.</p>
 
@@ -70,57 +86,76 @@
             <div class="bar"><span>All tabs awake</span><div class="track"><div class="fill" style="--w: 100%">1,921 MB</div></div></div>
             <div class="bar brisk"><span>After 10 idle minutes</span><div class="track"><div class="fill" style="--w: 19.5%">375 MB</div></div></div>
           </figure>
-        </section>
+        </div>
+      </section>
 
-        <section class="block" aria-labelledby="small-title">
+      <section class="block" aria-labelledby="small-title">
+        <div class="wrap">
           <h2 id="small-title">Small where it counts</h2>
           <ul class="facts">
             <li><b>0.34 ms</b><span>to check a request against the filter lists, on average</span></li>
-            <li><b>37 MB</b><span>used by Brisk's own process; the rest belongs to the pages you open</span></li>
-            <li><b>67</b><span>ads and trackers blocked on an average run of the ten sites</span></li>
+            <li><b><span data-count="37">37</span> MB</b><span>used by Brisk's own process; the rest belongs to the pages you open</span></li>
+            <li><b><span data-count="67">67</span></b><span>ads and trackers blocked on an average run of the ten sites</span></li>
             <li><b>7.3 MB</b><span>installer, because the web engine is already part of Windows 11</span></li>
           </ul>
-        </section>
+        </div>
+      </section>
 
-        <section class="block" aria-labelledby="method-title">
+      <section class="block story" aria-labelledby="method-title">
+        <div class="wrap">
           <h2 id="method-title">How we measured</h2>
           <dl class="method">
             <dt>Sites</dt>
-            <dd>cnn.com, bbc.com/news, theguardian.com, dailymail.co.uk, forbes.com, weather.com, sanook.com, thairath.co.th, pantip.com and kapook.com, loaded one after another in fresh tabs.</dd>
+            <dd>cnn.com, bbc.com/news, theguardian.com, dailymail.co.uk, forbes.com, weather.com, sanook.com, thairath.co.th, pantip.com and kapook.com, loaded one after another in new tabs.</dd>
             <dt>Page load</dt>
             <dd>From opening the tab until the page reports it has finished loading, timed inside Brisk. Each run then waits five more seconds for late ads before memory is read.</dd>
             <dt>Processor time and memory</dt>
-            <dd>Processor time is the total used by Brisk and its web engine processes while loading. Memory is private bytes of all those processes with every site still open.</dd>
+            <dd>Processor time is the total used by Brisk and its web engine processes while loading. Memory is the private bytes of all those processes with every site still open.</dd>
             <dt>Runs</dt>
             <dd>Three runs with ad blocking off and four with it on, on 8–9 November 2026; the figures are the averages of those runs. The sleep test is one run with ten idle minutes.</dd>
             <dt>Computer</dt>
             <dd>Intel Core i5-11400F, 32 GB RAM, Windows 11, Microsoft Edge WebView2 Evergreen runtime, home broadband.</dd>
           </dl>
-        </section>
+        </div>
+      </section>
 
-        <section class="block" aria-labelledby="others-title">
+      <section class="block" aria-labelledby="others-title">
+        <div class="wrap">
           <h2 id="others-title">What about other browsers?</h2>
           <p class="note">
             <b>We haven't run Chrome, Edge or Firefox through this test yet.</b> When we do, their numbers will appear here, measured the same way on the same sites. Until then we only publish what we measured.
           </p>
-        </section>
-      </main>
-    </div>
+        </div>
+      </section>
+    </main>
 
     <footer class="site-foot">
       <div class="wrap">
-        <div class="cols">
-          <a class="mark" href="./"><img src="logo.svg" alt="" />Brisk<sup>™</sup></a>
-          <nav aria-label="Footer">
+        <div class="foot-grid">
+          <div class="foot-brand">
+            <a class="mark" href="./"><img src="logo.svg" alt="" />Brisk<sup>™</sup></a>
+            <p>A lighter way to browse on Windows.</p>
+          </div>
+          <nav aria-label="Product">
+            <h2>Product</h2>
+            <a href="features.html">Features</a>
             <a href="speed.html">Speed</a>
-            <a href="./#story">Story</a>
-            <a href="https://github.com/koharuame/brisk-browser/releases">Releases</a>
+            <a href="download.html">Download</a>
+            <a href="changelog.html">Changelog</a>
+          </nav>
+          <nav aria-label="About">
+            <h2>About</h2>
+            <a href="story.html">Story</a>
+            <a href="story.html#brand">Brand and trademark</a>
+            <a href="https://github.com/koharuame/brisk-browser/issues">Report a problem</a>
           </nav>
         </div>
         <p class="legal">
-          © 2026 Koharuame. Brisk™ and the Brisk logo are trademarks of Koharuame. Microsoft, Windows, Edge and WebView2 are trademarks of the Microsoft group of companies. Chrome and Chrome Web Store are trademarks of Google LLC. Firefox is a trademark of the Mozilla Foundation. Site names belong to their owners and are used only to describe the test. Use of these names does not imply endorsement.
+          © 2026 Koharuame. Brisk™ and the Brisk logo are trademarks of Koharuame. Microsoft, Windows, Edge and WebView2 are trademarks of the Microsoft group of companies. Chrome is a trademark of Google LLC. Firefox is a trademark of the Mozilla Foundation. Site names belong to their owners and are used only to describe the test. Use of these names does not imply endorsement.
         </p>
       </div>
     </footer>
+
+    <script src="site.js"></script>
   </body>
 </html>

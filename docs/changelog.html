@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Changelog — Brisk</title>
+    <meta name="description" content="What's new in each version of Brisk." />
+    <link rel="icon" href="logo.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="fx.css" />
+    <link rel="stylesheet" href="pages.css" />
+    <link rel="stylesheet" href="motion.css" />
+    <script>
+      document.documentElement.classList.add("js");
+    </script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="site-head">
+      <div class="wrap head-row">
+        <a class="mark" href="./" aria-label="Brisk home"><img src="logo.svg" alt="" />Brisk<sup>™</sup></a>
+        <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav"><i></i><i></i><span class="sr">Menu</span></button>
+        <nav class="site-nav" id="site-nav" aria-label="Site">
+          <a href="features.html">Features</a>
+          <a href="speed.html">Speed</a>
+          <a href="story.html">Story</a>
+          <a href="changelog.html" aria-current="page">Changelog</a>
+          <a class="button small" href="download.html">Download</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <div class="page-head">
+        <svg class="streams" viewBox="0 0 1440 400" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M-60 200 C 260 110, 560 300, 860 190 S 1240 90, 1500 170" />
+          <path d="M-60 260 C 280 170, 600 360, 900 250 S 1260 160, 1500 240" />
+        </svg>
+        <div class="wrap">
+          <h1>What's new in Brisk.</h1>
+          <p class="lede">Every version, newest first. Brisk checks for updates once a day; install one from Settings → About whenever it suits you.</p>
+        </div>
+      </div>
+
+      <!--
+        To add a release: copy the <article> below, put it first, change the version, date and
+        lists, and give it class "release is-latest" (remove "is-latest" from the older one).
+        Sections: New, Improved, Fixed. Leave out any that are empty.
+      -->
+      <section class="block" aria-label="Releases">
+        <div class="wrap">
+          <div class="releases">
+            <div class="release-rail" aria-hidden="true"><div class="release-rail-fill"></div></div>
+
+            <article class="release is-latest" id="v0.1.0">
+              <header class="release-meta">
+                <span class="release-version">0.1.0</span>
+                <time datetime="2026-11">November 2026</time>
+                <span class="release-tag">Latest</span>
+              </header>
+              <div class="release-body">
+                <h2>Brisk's first release</h2>
+                <p class="release-lede">A light, private browser for Windows 11, built on the web engine Windows already has.</p>
+
+                <h3>New</h3>
+                <ul class="changes">
+                  <li><b>Ad and tracker blocking</b> on every request, with EasyList, EasyPrivacy, EasyList Thailand and uBlock Origin's filter lists, and a per-site switch in the shield.</li>
+                  <li><b>Malware and phishing warnings</b> from lists kept on your PC, and <b>HTTPS first</b> with a warning before any unencrypted connection.</li>
+                  <li><b>Sleeping tabs</b> in four steps, with a memory budget, a never-sleep list, battery saver and a task manager (<kbd>Shift</kbd><kbd>Esc</kbd>).</li>
+                  <li><b>Tear tabs off</b> into their own windows and drag them back; <b>tab groups</b> with names and colors; pinned tabs; every window restored on restart.</li>
+                  <li><b>Private tabs</b> and <b>profiles</b> with separate cookies and sign-ins; tracking prevention, Global Privacy Control and per-site permissions.</li>
+                  <li><b>Password manager</b> with an encrypted vault, a password generator and CSV import.</li>
+                  <li><b>Chrome Web Store extensions</b>, verified before install and switchable per profile.</li>
+                  <li><b>History, bookmarks and downloads</b> in one library, with search as you type and bookmark import and export.</li>
+                  <li><b>Brisk Setup</b>, which checks your PC before installing, and <b>built-in updates</b>, each one signature-checked.</li>
+                  <li>Light and dark themes, nine color themes, and an English and Thai interface.</li>
+                </ul>
+                <p class="release-links">
+                  <a href="https://github.com/koharuame/brisk-browser/releases/tag/v0.1.0">Download files for 0.1.0</a>
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-foot">
+      <div class="wrap">
+        <div class="foot-grid">
+          <div class="foot-brand">
+            <a class="mark" href="./"><img src="logo.svg" alt="" />Brisk<sup>™</sup></a>
+            <p>A lighter way to browse on Windows.</p>
+          </div>
+          <nav aria-label="Product">
+            <h2>Product</h2>
+            <a href="features.html">Features</a>
+            <a href="speed.html">Speed</a>
+            <a href="download.html">Download</a>
+            <a href="changelog.html">Changelog</a>
+          </nav>
+          <nav aria-label="About">
+            <h2>About</h2>
+            <a href="story.html">Story</a>
+            <a href="story.html#brand">Brand and trademark</a>
+            <a href="https://github.com/koharuame/brisk-browser/issues">Report a problem</a>
+          </nav>
+        </div>
+        <p class="legal">
+          © 2026 Koharuame. Brisk™ and the Brisk logo are trademarks of Koharuame. Microsoft, Windows and WebView2 are trademarks of the Microsoft group of companies. Chrome Web Store is a trademark of Google LLC. uBlock Origin, EasyList and EasyPrivacy belong to their respective owners. Use of these names does not imply endorsement.
+        </p>
+      </div>
+    </footer>
+
+    <script src="site.js"></script>
+  </body>
+</html>

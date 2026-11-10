@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Story — Brisk</title>
+    <meta name="description" content="Why Brisk exists, what it holds to, how it's built, and how to use the Brisk name and logo." />
+    <link rel="icon" href="logo.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="fx.css" />
+    <link rel="stylesheet" href="pages.css" />
+    <link rel="stylesheet" href="motion.css" />
+    <script>
+      document.documentElement.classList.add("js");
+    </script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="site-head">
+      <div class="wrap head-row">
+        <a class="mark" href="./" aria-label="Brisk home"><img src="logo.svg" alt="" />Brisk<sup>™</sup></a>
+        <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav"><i></i><i></i><span class="sr">Menu</span></button>
+        <nav class="site-nav" id="site-nav" aria-label="Site">
+          <a href="features.html">Features</a>
+          <a href="speed.html">Speed</a>
+          <a href="story.html" aria-current="page">Story</a>
+          <a href="changelog.html">Changelog</a>
+          <a class="button small" href="download.html">Download</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <div class="page-head">
+        <svg class="streams" viewBox="0 0 1440 400" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M-60 200 C 260 110, 560 300, 860 190 S 1240 90, 1500 170" />
+          <path d="M-60 260 C 280 170, 600 360, 900 250 S 1260 160, 1500 240" />
+        </svg>
+        <div class="wrap">
+          <h1>A browser that does less, on purpose.</h1>
+          <p class="lede">Why Brisk exists, what it holds to, and how it's made.</p>
+        </div>
+      </div>
+
+      <section class="block" aria-labelledby="why-title">
+        <div class="wrap story-grid">
+          <div>
+            <h2 id="why-title" class="sr">Why Brisk exists</h2>
+            <div class="long-read">
+              <p>Browsers kept getting heavier. Each one shipped its own copy of a web engine, asked you to sign in, and quietly reported how it was used. Opening a news article meant downloading a few dozen companies' scripts along with it.</p>
+              <p>Windows 11 already includes a modern web engine, Microsoft Edge WebView2, kept up to date by Windows itself. Brisk started in November 2026 with a simple question: what if a browser used that engine, and spent its own effort only on the things that make browsing feel fast?</p>
+              <p>That turned out to be two things. Don't load what nobody asked for, and let the tabs you aren't looking at rest. Everything else in Brisk is there to stay out of the way.</p>
+              <p>Brisk is made by one person, measured on real websites, and built to be used every day.</p>
+            </div>
+            <p class="signature">Koharuame, maker of Brisk</p>
+          </div>
+          <figure class="mark-study" aria-hidden="true">
+            <svg viewBox="0 0 64 64">
+              <defs>
+                <linearGradient id="plate2" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#5b8fff" />
+                  <stop offset="1" stop-color="#2556d6" />
+                </linearGradient>
+              </defs>
+              <rect width="64" height="64" rx="15" fill="url(#plate2)" />
+              <g fill="none" stroke="#fff" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round" class="draw">
+                <path d="M26 17v30" />
+                <path d="M13 17h21a7.5 7.5 0 0 1 0 15H26" />
+                <path d="M26 32h11a7.5 7.5 0 0 1 0 15H8" opacity=".9" />
+              </g>
+            </svg>
+            <figcaption>The Gust B: three strokes, the last one trailing off like wind.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="block story" aria-labelledby="hold-title">
+        <div class="wrap">
+          <h2 id="hold-title">What Brisk holds to</h2>
+          <ul class="tenets">
+            <li><h3>No telemetry</h3><p>Brisk doesn't report what you do, what you visit, or how you use it. Not anonymously, not in aggregate, not at all.</p></li>
+            <li><h3>No account</h3><p>There's nothing to sign in to. Your data is files on your PC, and it's yours to back up or delete.</p></li>
+            <li><h3>Nothing running in the background</h3><p>When you close Brisk, it's closed. No updater service, no helper left behind.</p></li>
+            <li><h3>Measured, not claimed</h3><p>Performance changes ship only when they make Brisk faster or lighter on real sites, and the numbers are published.</p></li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="block" aria-labelledby="built-title">
+        <div class="wrap">
+          <h2 id="built-title">How Brisk is built</h2>
+          <p class="intro">Small parts, each chosen for one reason.</p>
+          <div class="stack">
+            <div><h3>Microsoft Edge WebView2</h3><p>The web engine that ships with Windows 11 and updates with it. Sites work as they do in Edge, and Brisk doesn't carry its own copy.</p></div>
+            <div><h3>Rust</h3><p>Brisk's own code — blocking, sleeping tabs, the password vault — is written in Rust, for speed and memory safety.</p></div>
+            <div><h3>Tauri</h3><p>The framework that holds the windows and the interface together, in a few megabytes instead of a few hundred.</p></div>
+            <div><h3>adblock-rust</h3><p>The same filtering engine Brave uses, checking each request in a fraction of a millisecond.</p></div>
+          </div>
+        </div>
+      </section>
+
+
+      <section class="block story" id="brand" aria-labelledby="brand-title">
+        <div class="wrap">
+          <h2 id="brand-title">Brand and trademark</h2>
+          <p class="intro">Writing about Brisk, reviewing it or linking to it? Here's how to show the name and the mark.</p>
+          <div class="brand-grid">
+            <div class="logo-tiles">
+              <div class="tile-light"><img src="logo.svg" alt="Brisk logo on white" /></div>
+              <div class="tile-dark"><img src="logo.svg" alt="Brisk logo on navy" /></div>
+              <div class="tile-sky"><img src="logo.svg" alt="Brisk logo on blue" /></div>
+              <div class="tile-word"><span><img src="logo.svg" alt="" />Brisk</span></div>
+            </div>
+            <div>
+              <ul class="swatches" aria-label="Brand colors">
+                <li><i style="background: #2f6fed"></i><span>Gust<small>#2F6FED</small></span></li>
+                <li><i style="background: #2556d6"></i><span>Deep gust<small>#2556D6</small></span></li>
+                <li><i style="background: #0f1b33"></i><span>Night<small>#0F1B33</small></span></li>
+                <li><i style="background: #f3f6fb"></i><span>Air<small>#F3F6FB</small></span></li>
+              </ul>
+              <h3>Using the name and logo</h3>
+              <ul class="rules">
+                <li>Write the name as <b>Brisk</b>, with a capital B. Brisk™ on first mention is welcome but not required.</li>
+                <li>Use the logo as it is: don't recolor, stretch, rotate or add effects to it.</li>
+                <li>Leave space around the logo at least a quarter of its width.</li>
+                <li>Don't use the name or logo in a way that suggests Brisk made, endorses or sponsors your product.</li>
+              </ul>
+              <p><a class="button small" href="logo.svg" download="brisk-logo.svg">Download the logo (SVG)</a></p>
+            </div>
+          </div>
+          <p class="fine">Brisk™ and the Brisk logo are trademarks of Koharuame. The typeface on this site is Bricolage Grotesque.</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-foot">
+      <div class="wrap">
+        <div class="foot-grid">
+          <div class="foot-brand">
+            <a class="mark" href="./"><img src="logo.svg" alt="" />Brisk<sup>™</sup></a>
+            <p>A lighter way to browse on Windows.</p>
+          </div>
+          <nav aria-label="Product">
+            <h2>Product</h2>
+            <a href="features.html">Features</a>
+            <a href="speed.html">Speed</a>
+            <a href="download.html">Download</a>
+            <a href="changelog.html">Changelog</a>
+          </nav>
+          <nav aria-label="About">
+            <h2>About</h2>
+            <a href="story.html">Story</a>
+            <a href="story.html#brand">Brand and trademark</a>
+            <a href="https://github.com/koharuame/brisk-browser/issues">Report a problem</a>
+          </nav>
+        </div>
+        <p class="legal">
+          © 2026 Koharuame. Brisk™ and the Brisk logo are trademarks of Koharuame. Microsoft, Windows, Edge and WebView2 are trademarks of the Microsoft group of companies. Brave is a trademark of Brave Software, Inc. Tauri and Rust are trademarks of their respective owners. Use of these names does not imply endorsement.
+        </p>
+      </div>
+    </footer>
+
+    <script src="site.js"></script>
+  </body>
+</html>

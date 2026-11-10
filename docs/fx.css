@@ -1,0 +1,583 @@
+/* Interactive layer (site.js). Everything still reads fine without script. */
+
+/* --- hero: wind field + layout ------------------------------------------------ */
+.hero {
+  padding: 40px 0 110px;
+  background:
+    radial-gradient(70% 60% at 85% 20%, rgba(91, 143, 255, 0.18), transparent 70%),
+    radial-gradient(50% 50% at 10% 90%, rgba(47, 111, 237, 0.08), transparent 70%);
+}
+
+.wind-field {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* With the canvas running, the static streams step back. */
+.has-wind .hero .streams {
+  opacity: 0.35;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  align-items: center;
+  gap: 56px;
+}
+
+.hero h1 {
+  font-size: clamp(44px, 6.2vw, 84px);
+}
+
+/* --- the demo window ---------------------------------------------------------- */
+.demo {
+  margin: 0;
+}
+
+.demo-win {
+  overflow: hidden;
+  border-radius: 14px;
+  background: #eceef3;
+  box-shadow:
+    0 0 0 1px rgba(15, 27, 51, 0.1),
+    0 30px 60px -20px rgba(15, 27, 51, 0.35),
+    0 12px 24px -12px rgba(37, 86, 214, 0.25);
+  transform: perspective(1400px) rotateY(-6deg) rotateX(2deg);
+  transition: transform 0.6s var(--ease);
+  font-size: 12px;
+}
+
+.demo:hover .demo-win {
+  transform: perspective(1400px) rotateY(-2deg) rotateX(1deg);
+}
+
+.demo-strip {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 38px;
+  padding: 6px 0 0 10px;
+}
+
+.demo-tab {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  height: 30px;
+  padding: 0 12px;
+  border-radius: 8px 8px 0 0;
+  color: #5b6070;
+  white-space: nowrap;
+}
+
+.demo-tab.is-active {
+  background: #fff;
+  color: var(--ink);
+}
+
+.demo-tab .dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  background: var(--gust);
+}
+
+.demo-tab svg {
+  width: 12px;
+  height: 12px;
+  fill: #8a93a8;
+}
+
+.demo-tab.is-asleep {
+  opacity: 0.6;
+}
+
+.demo-win-btns {
+  display: flex;
+  gap: 14px;
+  margin-left: auto;
+  padding: 0 14px;
+}
+
+.demo-win-btns i {
+  width: 10px;
+  height: 1.5px;
+  background: #8a93a8;
+}
+
+.demo-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 40px;
+  padding: 0 12px;
+  background: #fff;
+}
+
+.demo-url {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: 8px;
+  height: 28px;
+  padding: 0 12px;
+  border-radius: 14px;
+  background: #f1f3f7;
+  color: #4a5873;
+}
+
+.demo-url svg,
+.demo-shield svg {
+  width: 13px;
+  height: 13px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.4;
+}
+
+.demo-shield {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  height: 28px;
+  padding: 0 10px;
+  border-radius: 14px;
+  background: rgba(47, 111, 237, 0.12);
+  color: var(--gust-deep);
+  font-variant-numeric: tabular-nums;
+  transition:
+    background-color 0.3s var(--ease),
+    color 0.3s var(--ease);
+}
+
+[data-adblock="off"] .demo-shield {
+  background: #f1f3f7;
+  color: #8a93a8;
+}
+
+.demo-shield.bump {
+  animation: bump 0.25s var(--ease);
+}
+
+@keyframes bump {
+  50% {
+    transform: scale(1.15);
+  }
+}
+
+.demo-page {
+  position: relative;
+  height: 300px;
+  margin: 0 6px 6px;
+  overflow: hidden;
+  border-radius: 0 0 9px 9px;
+  background: #fff;
+}
+
+.demo-progress {
+  position: absolute;
+  inset: 0 auto auto 0;
+  z-index: 1;
+  width: 0;
+  height: 3px;
+  background: var(--gust);
+  opacity: 0;
+}
+
+.demo-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 22px 26px;
+}
+
+/* Without script the skeleton just shows; site.js hides it and builds it in on each load. */
+.sk,
+.sk-img {
+  height: 10px;
+  border-radius: 5px;
+  background: #e9edf4;
+  transition:
+    opacity 0.3s var(--ease),
+    transform 0.3s var(--ease);
+}
+
+.js .sk,
+.js .sk-img {
+  opacity: 0;
+  transform: translateY(4px);
+}
+
+.js .sk.is-shown,
+.js .sk-img.is-shown {
+  opacity: 1;
+  transform: none;
+}
+
+.sk-title {
+  width: 70%;
+  height: 18px;
+  background: #d6deec;
+}
+
+.sk-short {
+  width: 55%;
+}
+
+.sk-img {
+  flex: 1;
+  height: 70px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #dce6f7, #eef3fb);
+}
+
+.demo-cols {
+  display: flex;
+  gap: 12px;
+}
+
+/* Ad slots: loud when they load, folded to a quiet "blocked" line when Brisk stops them. */
+.ad {
+  display: grid;
+  place-items: center;
+  height: 0;
+  margin: -5px 0;
+  overflow: hidden;
+  border-radius: 6px;
+  background: repeating-linear-gradient(45deg, #ffe7b0 0 10px, #ffd98a 10px 20px);
+  color: #8a5a00;
+  font-weight: 700;
+  opacity: 0;
+  transition:
+    height 0.35s var(--ease),
+    opacity 0.25s var(--ease),
+    margin 0.35s var(--ease);
+}
+
+.ad.is-loaded {
+  height: 46px;
+  margin: 0;
+  opacity: 1;
+}
+
+.ad-side {
+  width: 34%;
+}
+
+.ad-side.is-loaded,
+.ad-side.is-blocked {
+  height: 70px;
+}
+
+.ad.is-blocked {
+  height: 22px;
+  margin: 0;
+  background: rgba(47, 111, 237, 0.08);
+  color: var(--gust-deep);
+  font-weight: 600;
+  opacity: 1;
+}
+
+.demo-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 22px;
+  font-variant-numeric: tabular-nums;
+}
+
+.demo-time {
+  color: var(--ink-2);
+  font-size: 15px;
+}
+
+.demo-time b {
+  color: var(--ink);
+}
+
+.demo-note {
+  margin: 8px 0 0;
+  color: var(--ink-2);
+  font-size: 13px;
+}
+
+/* A Windows-style toggle switch. */
+.switch {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.switch input {
+  position: absolute;
+  opacity: 0;
+}
+
+.switch-track {
+  position: relative;
+  width: 44px;
+  height: 24px;
+  border-radius: 12px;
+  background: #b9c3d6;
+  transition: background-color 0.2s var(--ease);
+}
+
+.switch-track span {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #fff;
+  transition: transform 0.25s var(--ease);
+}
+
+.switch input:checked + .switch-track {
+  background: var(--gust);
+}
+
+.switch input:checked + .switch-track span {
+  transform: translateX(20px);
+}
+
+.switch input:focus-visible + .switch-track {
+  outline: 3px solid var(--gust);
+  outline-offset: 3px;
+}
+
+/* --- sleeping tabs: ten tabs fall asleep as the section comes into view -------- */
+.sleepy b {
+  font-variant-numeric: tabular-nums;
+}
+
+.naps {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  height: 32px;
+  margin-bottom: 14px;
+}
+
+.naps i {
+  width: 22px;
+  height: 28px;
+  border-radius: 5px;
+  background: var(--gust);
+  transition:
+    background-color 0.5s var(--ease),
+    height 0.5s var(--ease);
+}
+
+.naps i:first-child {
+  outline: 2px solid var(--gust);
+  outline-offset: 2px;
+}
+
+.naps i.is-asleep {
+  height: 8px;
+  background: var(--mist);
+}
+
+/* --- story with the mark drawn large ----------------------------------------- */
+.story-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 64px;
+}
+
+.mark-study {
+  margin: 0;
+  text-align: center;
+}
+
+.mark-study svg {
+  width: min(100%, 300px);
+  filter: drop-shadow(0 30px 50px rgba(37, 86, 214, 0.35));
+}
+
+.mark-study .draw path {
+  stroke-dasharray: 80;
+  stroke-dashoffset: 0;
+}
+
+.mark-study.is-drawing .draw path {
+  animation: draw 1.4s var(--ease) both;
+}
+
+.mark-study.is-drawing .draw path:nth-child(2) {
+  animation-delay: 0.25s;
+}
+
+.mark-study.is-drawing .draw path:nth-child(3) {
+  animation-delay: 0.5s;
+}
+
+@keyframes draw {
+  from {
+    stroke-dashoffset: 80;
+  }
+}
+
+.mark-study figcaption {
+  max-width: 20em;
+  margin: 20px auto 0;
+  color: var(--ink-2);
+  font-size: 15px;
+}
+
+/* --- the sky: download band ------------------------------------------------- */
+.sky {
+  position: relative;
+  overflow: hidden;
+  padding: 96px 0 80px;
+  background: linear-gradient(160deg, #3d74f5 0%, #2556d6 55%, #1d44b0 100%);
+  color: #fff;
+}
+
+.sky-streams {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.sky-streams path {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.16);
+  stroke-width: 1.5;
+  stroke-dasharray: 160 900;
+  animation: drift 9s linear infinite;
+}
+
+.sky-streams path:nth-child(2) {
+  animation-duration: 12s;
+  animation-delay: -4s;
+}
+
+.sky-streams path:nth-child(3) {
+  animation-duration: 15s;
+  animation-delay: -8s;
+}
+
+@keyframes drift {
+  from {
+    stroke-dashoffset: 1060;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.sky .wrap {
+  position: relative;
+}
+
+.sky-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+}
+
+.sky h2 {
+  margin-bottom: 10px;
+}
+
+.sky-lede {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 18px;
+}
+
+.button.light {
+  background: #fff;
+  color: var(--ink);
+}
+
+.button.light:hover {
+  background: var(--paper-2);
+}
+
+.sky .reqs li {
+  border-top-color: rgba(255, 255, 255, 0.22);
+}
+
+.sky .reqs b {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.sky a:focus-visible {
+  outline-color: #fff;
+}
+
+/* --- speed page: bars grow when they come into view ----------------------------- */
+.js .bar .fill {
+  animation: none;
+  transform: scaleX(0);
+  transition: transform 1s var(--ease);
+}
+
+.js .chart.is-seen .fill {
+  transform: none;
+}
+
+.js .chart.is-seen .bar.brisk .fill {
+  transition-delay: 0.15s;
+}
+
+/* --- responsive + reduced motion for this layer ---------------------------------- */
+@media (max-width: 900px) {
+  .hero-grid,
+  .story-grid {
+    grid-template-columns: 1fr;
+  }
+  .demo-win,
+  .demo:hover .demo-win {
+    transform: none;
+  }
+  .mark-study svg {
+    width: 180px;
+  }
+}
+
+@media (max-width: 520px) {
+  .demo-tab.is-asleep + .demo-tab.is-asleep,
+  .demo-win-btns {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wind-field {
+    display: none;
+  }
+  .demo-win,
+  .demo:hover .demo-win {
+    transform: none;
+    transition: none;
+  }
+  .sky-streams path,
+  .mark-study.is-drawing .draw path {
+    animation: none;
+  }
+  .js .bar .fill {
+    transform: none;
+    transition: none;
+  }
+  .naps i,
+  .ad,
+  .sk,
+  .sk-img {
+    transition: none;
+  }
+}

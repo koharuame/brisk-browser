@@ -1,0 +1,463 @@
+/* Motion: the page arriving, things gusting into view, the wind tunnel, page transitions.
+   Driven by site.js; with reduced motion everything is simply there. */
+
+/* --- page transitions between pages (Chromium; elsewhere pages just load) ------------- */
+@view-transition {
+  navigation: auto;
+}
+
+.site-head {
+  view-transition-name: site-head;
+}
+
+::view-transition-old(root) {
+  animation: vt-out 0.28s var(--ease) both;
+}
+
+::view-transition-new(root) {
+  animation: vt-in 0.45s var(--ease) both;
+}
+
+@keyframes vt-out {
+  to {
+    opacity: 0;
+    transform: translateX(-24px);
+  }
+}
+
+@keyframes vt-in {
+  from {
+    opacity: 0;
+    transform: translateX(32px);
+  }
+}
+
+/* --- reading progress: a thin gust across the top ------------------------------------- */
+.progress-bar {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 30;
+  height: 3px;
+  background: linear-gradient(90deg, #8fb4ff, var(--gust), var(--gust-deep));
+  transform: scaleX(0);
+  transform-origin: left;
+  pointer-events: none;
+}
+
+/* --- buttons: a gust of light passes over on hover --------------------------------------- */
+.button {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.button::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(100deg, transparent 20%, rgba(255, 255, 255, 0.35) 50%, transparent 80%);
+  transform: translateX(-120%);
+}
+
+.button:hover::after {
+  transform: translateX(120%);
+  transition: transform 0.7s var(--ease);
+}
+
+.button.light::after {
+  background: linear-gradient(100deg, transparent 20%, rgba(47, 111, 237, 0.18) 50%, transparent 80%);
+}
+
+/* --- the home page arriving ------------------------------------------------------------ */
+/* Headline words rise out of their own line, one after another. */
+.js .hero h1 .w {
+  display: inline-block;
+  overflow: hidden;
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+  vertical-align: top;
+}
+
+.js .hero h1 .w > span {
+  display: inline-block;
+  transform: translateY(110%) rotate(4deg);
+  transform-origin: left bottom;
+  animation: word-up 0.9s var(--ease) forwards;
+  animation-delay: calc(0.15s + var(--i) * 0.07s);
+}
+
+@keyframes word-up {
+  to {
+    transform: none;
+  }
+}
+
+.js .hero .lede,
+.js .hero .actions {
+  opacity: 0;
+  animation: rise-in 0.9s var(--ease) forwards;
+}
+
+.js .hero .lede {
+  animation-delay: 0.6s;
+}
+
+.js .hero .actions {
+  animation-delay: 0.75s;
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* The demo window swings in, then follows the pointer (site.js sets --rx/--ry). */
+.js .demo-win {
+  --rx: 2deg;
+  --ry: -6deg;
+  transform: perspective(1400px) rotateY(var(--ry)) rotateX(var(--rx));
+  transition: transform 0.5s var(--ease);
+}
+
+.js .demo:hover .demo-win {
+  transform: perspective(1400px) rotateY(var(--ry)) rotateX(var(--rx));
+}
+
+.js .demo {
+  animation: swing-in 1.3s var(--ease) 0.35s both;
+}
+
+@keyframes swing-in {
+  from {
+    opacity: 0;
+    transform: perspective(1400px) translateX(60px) rotateY(-28deg) scale(0.92);
+  }
+}
+
+/* A soft glow under the window, like it is floating. */
+.demo-win {
+  position: relative;
+}
+
+.demo::before {
+  content: "";
+  position: absolute;
+  inset: 12% 8% -6% 8%;
+  z-index: -1;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(47, 111, 237, 0.35), transparent);
+  filter: blur(30px);
+}
+
+.demo {
+  position: relative;
+}
+
+/* --- things gust into view --------------------------------------------------------------- */
+/* site.js tags elements with .rv and staggers them with --d; .is-in plays it. */
+.js .rv {
+  opacity: 0;
+  transform: translate(-28px, 22px);
+  transition:
+    opacity 0.8s var(--ease),
+    transform 0.9s var(--ease);
+  transition-delay: calc(var(--d, 0) * 90ms);
+}
+
+.js .rv.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* Section headings are wiped in from the left with a gust line sweeping underneath. */
+.js .rv-head {
+  position: relative;
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 1s var(--ease);
+}
+
+.js .rv-head.is-in {
+  clip-path: inset(0 0 -20px 0);
+}
+
+.js .rv-head::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -10px;
+  width: 64px;
+  height: 3px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--gust), transparent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 1.1s var(--ease) 0.35s;
+}
+
+.js .rv-head.is-in::after {
+  transform: none;
+}
+
+.sky .rv-head::after {
+  background: linear-gradient(90deg, #fff, transparent);
+}
+
+/* --- wind tunnel ---------------------------------------------------------------------------- */
+.tunnel {
+  position: relative;
+  overflow: hidden;
+  padding: 56px 0;
+  border-top: 1px solid var(--line);
+  background:
+    linear-gradient(90deg, var(--paper) 0, transparent 12%, transparent 88%, var(--paper) 100%),
+    repeating-linear-gradient(0deg, transparent 0 22px, rgba(47, 111, 237, 0.05) 22px 23px);
+}
+
+.tunnel-row {
+  display: flex;
+  gap: 0.6em;
+  width: max-content;
+  font-size: clamp(56px, 10vw, 140px);
+  font-weight: 800;
+  font-variation-settings: "wdth" 75;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  white-space: nowrap;
+  will-change: transform;
+}
+
+.tunnel-row span::after {
+  content: "";
+  display: inline-block;
+  width: 0.28em;
+  height: 0.28em;
+  margin-left: 0.6em;
+  border-radius: 50%;
+  background: var(--gust);
+  vertical-align: middle;
+}
+
+.tunnel-row + .tunnel-row {
+  margin-top: 0.1em;
+}
+
+.tunnel-row.is-outline {
+  color: transparent;
+  -webkit-text-stroke: 2px var(--gust);
+}
+
+.tunnel-row.is-outline span::after {
+  background: transparent;
+  box-shadow: inset 0 0 0 3px var(--gust);
+}
+
+/* --- changelog -------------------------------------------------------------------------------- */
+.releases {
+  position: relative;
+  padding-left: 48px;
+}
+
+.release-rail {
+  position: absolute;
+  top: 8px;
+  bottom: 0;
+  left: 11px;
+  width: 3px;
+  border-radius: 2px;
+  background: var(--mist);
+}
+
+.release-rail-fill {
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(var(--gust), var(--gust-deep));
+  transform: scaleY(var(--fill, 1));
+  transform-origin: top;
+}
+
+.release {
+  position: relative;
+  display: grid;
+  grid-template-columns: 12em minmax(0, 1fr);
+  gap: 24px 48px;
+  padding-bottom: 72px;
+}
+
+.release::before {
+  content: "";
+  position: absolute;
+  top: 6px;
+  left: -44px;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background: var(--paper);
+  box-shadow: inset 0 0 0 3px var(--gust);
+}
+
+.release.is-latest::before {
+  background: var(--gust);
+  box-shadow: 0 0 0 6px rgba(47, 111, 237, 0.18);
+  animation: pulse 2.4s var(--ease) infinite;
+}
+
+@keyframes pulse {
+  50% {
+    box-shadow: 0 0 0 12px rgba(47, 111, 237, 0);
+  }
+}
+
+.release-meta {
+  position: sticky;
+  top: 100px;
+  align-self: start;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.release-version {
+  font-size: 44px;
+  font-weight: 800;
+  font-variation-settings: "wdth" 80;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.release-meta time {
+  color: var(--ink-2);
+}
+
+.release-tag {
+  align-self: start;
+  padding: 3px 12px;
+  border-radius: 999px;
+  background: var(--gust);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.release-body h2 {
+  font-size: clamp(28px, 3.4vw, 40px);
+  margin-bottom: 10px;
+}
+
+.release-lede {
+  max-width: var(--measure);
+  margin: 0 0 28px;
+  color: var(--ink-2);
+  font-size: 19px;
+}
+
+.release-body h3 {
+  margin-top: 8px;
+}
+
+.changes {
+  max-width: 44em;
+  margin: 0 0 24px;
+  padding: 0;
+  list-style: none;
+}
+
+.changes li {
+  position: relative;
+  padding: 12px 0 12px 22px;
+  border-top: 1px solid var(--line);
+  color: var(--ink-2);
+}
+
+.changes li::before {
+  content: "";
+  position: absolute;
+  top: 22px;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  background: var(--gust);
+  transform: rotate(45deg);
+}
+
+.changes b {
+  color: var(--ink);
+}
+
+.release-links {
+  margin: 0;
+  font-weight: 600;
+}
+
+@media (max-width: 760px) {
+  .releases {
+    padding-left: 34px;
+  }
+  .release-rail {
+    left: 6px;
+  }
+  .release::before {
+    left: -36px;
+  }
+  .release {
+    grid-template-columns: 1fr;
+  }
+  .release-meta {
+    position: static;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 12px;
+  }
+}
+
+/* Narrow screens: the demo sits flat under the headline. */
+@media (max-width: 900px) {
+  .js .demo-win {
+    --rx: 0deg;
+    --ry: 0deg;
+  }
+}
+
+/* --- reduced motion: show everything, move nothing ------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+  }
+  .js .hero h1 .w > span,
+  .js .hero .lede,
+  .js .hero .actions,
+  .js .demo,
+  .release.is-latest::before {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  .js .rv,
+  .js .rv-head {
+    opacity: 1;
+    transform: none;
+    clip-path: none;
+    transition: none;
+  }
+  .js .rv-head::after {
+    transform: none;
+    transition: none;
+  }
+  .button:hover::after {
+    transition: none;
+  }
+  .tunnel-row {
+    transform: none !important;
+  }
+}
